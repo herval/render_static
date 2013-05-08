@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/render_static/middleware.rb",
     "lib/render_static/rails/railtie.rb",
     "lib/render_static/renderer.rb",
+    "render_static.gemspec",
     "spec/middleware_spec.rb",
     "spec/renderer_spec.rb"
   ]
