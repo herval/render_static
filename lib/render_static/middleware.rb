@@ -8,15 +8,18 @@ module RenderStatic
   class Middleware
     class << self
       attr_accessor :base_path
+      attr_accessor :seo_id
     end
 
     def initialize(app)
-      @app = app
+      @app            = app
+      self.base_path  = '/'
+      self.seo_id     = 'seo_id'
     end
 
     def call(env)
       if will_render?(env)
-        RenderStatic::Renderer.render(env)
+        RenderStatic::Renderer.render(env, self.class.seo_id)
       else
         @app.call(env)
       end
