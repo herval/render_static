@@ -1,6 +1,6 @@
 require 'phantomjs'
 
-module RenderStatic
+module RailsAngularSeo
   class Renderer
 
     def self.render(env, seo_id)

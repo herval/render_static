@@ -1,7 +1,7 @@
-require 'render_static/rails/railtie' if defined?(Rails)
-require 'render_static/renderer'
+require 'rails_angular_seo/rails/railtie' if defined?(Rails)
+require 'rails_angular_seo/renderer'
 
-module RenderStatic
+module RailsAngularSeo
   class NotSeoFriendly < Exception
   end
 
@@ -19,7 +19,7 @@ module RenderStatic
 
     def call(env)
       if will_render?(env)
-        RenderStatic::Renderer.render(env, self.class.seo_id)
+        RailsAngularSeo::Renderer.render(env, self.class.seo_id)
       else
         @app.call(env)
       end
