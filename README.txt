@@ -1,10 +1,10 @@
-= render_static
+= rails_angular_seo
 
-* http://github.com/herval/render_static
+* http://github.com/arunn/rails_angular_seo
 
 == DESCRIPTION:
 
-render_static allows you to make your single-page apps (Backbone, Angular, etc) built on Rails SEO-friendly. It works by injecting a small rack middleware that will render pages as plain html, when the requester has one of the following user-agent headers:
+rails_angular_seo allows you to make your single-page apps (Backbone, Angular, etc) built on Rails SEO-friendly. It works by injecting a small rack middleware that will render pages as plain html, when the requester has one of the following user-agent headers:
 
 Googlebot
 Googlebot-Mobile
@@ -26,14 +26,14 @@ Please note that, in order for this to work, you need more than one thread/proce
 
 Add the following to your Gemfile:
 
-    gem 'render_static'
+    gem 'rails_angular_seo'
 
-In order to serve a set of routes as a single-page app, your routes.rb usually contains a catch-all route that will direct /* or /something/* to the same index.html file (the root of your js app). In order to allow the render_static middleware to intercept the right routes, you need to add this to your app initialization:
+In order to serve a set of routes as a single-page app, your routes.rb usually contains a catch-all route that will direct /* or /something/* to the same index.html file (the root of your js app). In order to allow the rails_angular_seo middleware to intercept the right routes, you need to add this to your app initialization:
 
-    config/initializers/render_static.rb
+    config/initializers/rails_angular_seo.rb
 
-    RenderStatic::Middleware.base_path = "/" # replace / for whichever path matches your app's index.html
-    RenderStatic::Middleware.seo_id    = "seo_id" # replace seo_id with whatever ID is used for the HTML DOM element which would be updated with status as "ready" once the ajax load is completed.
+    RailsAngularSeo::Middleware.base_path = "/" # replace / for whichever path matches your app's index.html
+    RailsAngularSeo::Middleware.seo_id    = "seo_id" # replace seo_id with whatever ID is used for the HTML DOM element which would be updated with status as "ready" once the ajax load is completed.
 
 And you're done! The middleware will only try to static-render requests made by bots AND that would render application/html content.
 
