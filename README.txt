@@ -30,10 +30,10 @@ Add the following to your Gemfile:
 
 In order to serve a set of routes as a single-page app, your routes.rb usually contains a catch-all route that will direct /* or /something/* to the same index.html file (the root of your js app). In order to allow the render_static middleware to intercept the right routes, you need to add this to your app initialization:
 
-    render_static.rb
-    RenderStatic::Middleware.base_path = "/" # replace / for whichever path matches your app's index.html
+    config/initializers/render_static.rb
 
-render_static will, by default, try to use Firefox as the driver to navigate to content. It will also try to run headlessly - if on a *nix box, you should install xvfb for that to work properly.
+    RenderStatic::Middleware.base_path = "/" # replace / for whichever path matches your app's index.html
+    RenderStatic::Middleware.seo_id    = "seo_id" # replace seo_id with whatever ID is used for the HTML DOM element which would be updated with status as "ready" once the ajax load is completed.
 
 And you're done! The middleware will only try to static-render requests made by bots AND that would render application/html content.
 
