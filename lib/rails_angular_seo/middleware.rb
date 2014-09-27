@@ -9,17 +9,17 @@ module RailsAngularSeo
     class << self
       attr_accessor :base_path
       attr_accessor :seo_id
+      attr_accessor :server_name
     end
 
     def initialize(app)
-      @app            = app
-      self.base_path  = '/'
-      self.seo_id     = 'seo_id'
+      @app = app
     end
 
     def call(env)
       if will_render?(env)
-        RailsAngularSeo::Renderer.render(env, self.class.seo_id)
+        self.class.server_name ||= env["HTTP_X_FORWARDED_HOST"]
+        RailsAngularSeo::Renderer.render(env, self.class.seo_id, self.class.server_name)
       else
         @app.call(env)
       end
@@ -33,12 +33,16 @@ module RailsAngularSeo
 
     def is_bot?(env)
       [
-          "Googlebot",
-          "Googlebot-Mobile",
-          "AdsBot-Google",
-          "Mozilla/5.0 (compatible; Ask Jeeves/Teoma; +http://about.ask.com/en/docs/about/webmasters.shtml)",
-          "Baiduspider",
+          "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+          "Googlebot/2.1 (+http://www.google.com/bot.html)",
+          "compatible; Mediapartners-Google/2.1; +http://www.google.com/bot.html",
+          "AdsBot-Google (+http://www.google.com/adsbot.html)",
+          "Mediapartners-Google",
           "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+          "Mozilla/5.0 (compatible; bingbot/2.0 +http://www.bing.com/bingbot.htm)",
+          "Baiduspider+(+http://www.baidu.com/search/spider_jp.html)",
+          "Baiduspider+(+http://www.baidu.com/search/spider.htm)",
+          "BaiDuSpider"
       ].include?(env["HTTP_USER_AGENT"])
     end
 

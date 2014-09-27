@@ -34,6 +34,7 @@ In order to serve a set of routes as a single-page app, your routes.rb usually c
 
     RailsAngularSeo::Middleware.base_path = "/" # replace / for whichever path matches your app's index.html
     RailsAngularSeo::Middleware.seo_id    = "seo_id" # replace seo_id with whatever ID is used for the HTML DOM element which would be updated with status as "ready" once the ajax load is completed.
+    RailsAngularSeo::Middleware.server_name    = "NAME OF YOUR SERVER"
 
 And you're done! The middleware will only try to static-render requests made by bots AND that would render application/html content.
 
