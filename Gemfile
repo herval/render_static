@@ -1,7 +1,6 @@
 source "http://rubygems.org"
 
-gem "selenium-webdriver"
-gem "headless"
+gem "phantomjs"
 
 group :development do
   gem "rspec"
